@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic of Vue 2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+    <div id='app'>
+        <div class="navbar is-light p-5">
+            <b class="mr-4">WEEK 5</b>
+            <a href="./index.html" class="mr-4">Basic of VueJS 2</a>
+            <a href="../ex2/index.html" class="mr-4">Shop from Vue</a>
+            <a href="../ex2/checkout.html">Checkout</a>
+        </div>
+
+
+
+
+        <div class="container is-max-desktop p-5">
+            <p class="my-4 has-background-danger-light p-3">
+                ข้อไหนอ่านโจทย์แล้วเกิดข้อสงสัยหรือไม่เข้าใจตรงไหนสามารถทักถามอาจารย์หรือ TA ก่อนได้เลย
+                ไม่จำเป็นต้องรอให้ถึงคาบเรียน
+            </p>
+
+            <p class="has-background-info-light p-2">สามารถแก้ไข Vue Instance ที่อยู่ใน
+                <code>&lt;script&gt;</code> ที่อยู่ส่วนล่างของ <code>checkout.html</code> ได้เลย!!! ไม่ต้องกลัวครับ
+            </p>
+
+
+
+            <p class="my-4"><b>ข้อ 1 </b>ประกาศตัวแปรเพื่อรับค่าจากแบบฟอร์มที่มีให้ ดังนี้
+                <li><code>prename</code> ใช้รับค่าจาก select ชื่อ <code>prename</code></li>
+                <li><code>fname</code> ใช้รับค่าจาก input ชื่อ <code>fname</code></li>
+                <li><code>lname</code> ใช้รับค่าจาก input ชื่อ <code>lname</code></li>
+                <li class="mb-4"><code>score</code> ใช้รับค่าจาก input ชื่อ <code>score</code></li>
+                เมื่อทำถูกต้องแล้ว ค่าต่าง ๆ ที่พิมพ์ไปจะแสดงเป็นตัวอักษรแดง ๆ ข้างล่างฟอร์ม
+            </p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
+                <code>&lt;div id="ex1"&gt;</code>
+            </p>
+
+            <!-- ข้อ 1 --------------------------------------------- -->
+            <div id='ex1'>
+                <div class="columns">
+                    <div class="column is-2">
+                        <label>Prename</label><br>
+                        <div class="select">
+                            <select class="select" name="prename" v-model="prename">
+                                <option>นาย</option>
+                                <option>นาง</option>
+                                <option>นางสาว</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label>Firstname</label>
+                        <input class="input" name="fname" v-model="fname" />
+                    </div>
+                    <div class="column">
+                        <label>Lastname</label>
+                        <input class="input" name="lname" v-model="lname" />
+                    </div>
+                    <div class="column">
+                        <label>Score</label>
+                        <input class="input" name="score" type="number" v-model="score" />
+                    </div>
+                </div>
+                <code>prename = {{prename}}</code><br>
+                <code>fname = {{fname}}</code><br>
+                <code>lname = {{lname}}</code><br>
+                <code>score = {{score}}</code><br>
+            </div>
+
+            <hr>
+
+
+
+            <p class="my-4"><b>ข้อ 2 </b> สังเกตว่าจะมีปุ่ม Add Student อยู่ปุ่มนึง และมี table ที่มี column "Name" และ
+                "Score" โดยนักศึกษาจะต้องทำให้เมื่อกดปุ่มนี้แล้ว ข้อมูลที่ถูกกรอกจากข้อ 1
+                จะต้องเพิ่มใน table ที่เห็นอยู่ โดยให้สร้าง Method ชื่อว่า addStudent() โดยมีรายละเอียดที่จะต้องทำใน
+                Method นี้ ดังนี้
+            <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
+                <li>ตรวจสอบข้อมูลทุกช่อง หากช่องไหนยังไม่ได้กรอก ให้ขึ้น Alert ว่า "Please enter all inputs"</li>
+                <li>ตรวจสอบข้อมูลจากช่องใส่คะแนน ค่าของคะแนนจะต้องอยู่ในช่วง 0-100 หากไม่ได้อยู่ในช่วงดังกล่าว ให้ขึ้น
+                    Alert ว่า "Score is incorrect"</li>
+                <li>ถ้าข้อมูลไม่ติดเงื่อนไขข้อ a. และ ข้อ b. แล้ว ให้เพิ่มข้อมูลที่กรอกไปในตัวแปร <code>students</code>
+                    ในรูปแบบของ <b>Object</b></li>
+                <li>ข้อมูลของช่องต่าง ๆ ที่อยู่ใน ข้อ 1. จะถูกเคลียค่าเป็นค่าว่างเหมือนเดิม</li>
+            </ul>
+            แต่ยังไม่จบแค่นั้น!! นักศึกษาจะต้อง loop ข้อมูลในตัวแปร <code>student</code> มาแสดงใน table
+            และแสดงข้อมูลตามตัวอย่างที่แสดงให้ดู ส่วนปุ่ม Delete จะใช้ในข้อถัดไป
+            </p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน <code>&lt;div id="ex2"&gt;</code>
+            </p>
+
+            <!-- ข้อ 2, ข้อ 3 --------------------------------------------- -->
+            <div id='ex2'>
+
+                <!-- ปุ่ม Add Student------------------- -->
+                <a class="button is-primary">Add Student</a>
+
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Score</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- ตัวอย่างข้อมูล------------ -->
+                            <tr>
+                                <td>นายxxxxx yyyyy</td>
+                                <td>99</td>
+                                <td>
+                                    <!-- ปุ่ม Delete------------------- -->
+                                    <a class="button is-danger">Delete</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr>
+
+            <p class="my-4"><b>ข้อ 3 </b> สร้าง Method ชื่อว่า <code>removeStudent()</code>
+                โดยจะมีหน้าที่ลบแถวของนักศึกษาที่ต้องการ โดยมีหลักการทำงานของ method ดังนี้
+                <li>รับ Parameter มา 1 ตัว คือ index ที่ได้จากการ loop</li>
+                <li class="mb-4">ลบ Object ตำแหน่งที่ index จาก Parameter ที่รับมา</li>
+                โดยเมื่อกดปุ่มลบของแถวที่ต้องการ จะทำการ call Method ดังกล่าว และแถวที่กด Delete
+                ก็จะต้องหายไปตามการทำงานของ Method
+            </p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ของปุ่ม Delete ใน <code>&lt;div id="ex2"&gt;</code>
+            </p>
+
+            <hr>
+
+            <p class="my-4"><b>ข้อ 4 </b> ให้สร้าง Computed Properties ขึ้นมา 2 ตัว
+                <li>ตัวแรกมีชื่อว่า <code>sumScore</code> โดยจะมีหน้าที่รวมคะแนนจากทุกคนจากตาราง<b>ข้อที่ 2.</b>
+                    โดยอัตโนมัติ
+                </li>
+                <li class="mb-4">ตัวที่สองมีชื่อว่า <code>avarageScore</code>
+                    โดยจะมีหน้าที่หาค่าคะแนนเฉลี่ยจากตาราง<b>ข้อที่
+                        2.</b>
+                    ซึ่งสามารถนำ
+                    <code>sumScore</code> มาใช้ต่อได้เลย
+                </li>
+                และแสดงผลลัพท์ที่ได้แทนที่ค่าตัวอย่างที่ให้มา
+            </p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code
+                ใน <code>&lt;div id="ex4"&gt;</code>
+            </p>
+
+            <!-- ข้อ 4 --------------------------------------------- -->
+            <div id="ex4">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="is-warning">sum</th>
+                            <td>
+                                <!-- แสดงผลรวมคะแนนที่นี้ -->
+                                120
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="is-primary">avarage</th>
+                            <td>
+                                <!-- แสดงค่าเฉลี่ยที่นี่ -->
+                                12.3
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <p class="my-4"><b>ข้อ 5 </b> ให้สร้าง <b>Watchers</b> ในการดักจับการเปลี่ยนแปลงของค่า 
+                <code>averageScore</code> และทำการบันทึกการเปลี่ยนแปลงเข้าไปในตัวแปร <code>logs</code> 
+                ในรูปแบบของ <b>Object</b> และนำข้อมูลใน <code>logs</code> มาแสดงผลในรูปของตาราง ตามตัวอย่างด้านล่าง
+                โดยมีเงื่อนไขในการแสดงผล ดังนี้
+                <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
+                    <li>ให้ตารางการแสดงผลมีทั้งหมด 3 columns ได้แก่ <b>Average Score Change, From และ Different From Old Value</b></li>
+                    <li>ถ้าค่า <code>averageScore</code> มีค่าเพิ่มขึ้น ให้แสดงผลโดยใช้ตัวอักษรสีเขียว</li>
+                    <li>ถ้าค่า <code>averageScore</code> มีค่าลดลง ให้แสดงผลโดยใช้ตัวอักษรสีแดง</li>
+                </ul>
+                </p>
+                <p class="my-4 has-background-info-light p-3">
+                    <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
+                    <code>&lt;div id="ex5"&gt;</code>
+                </p>
+
+            <!-- ข้อ 5 --------------------------------------------- -->
+            <div id="ex5">
+
+                <h1 class="is-size-4 my-5">Simple Log Table</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Average Score Change</th>
+                            <th>From</th>
+                            <th>Different From Old Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>50</td>
+                            <td>48.5</td>
+                            <td style="color : red">- 1.5</td>
+                        </tr>
+                        <tr>
+                            <td>48.5</td>
+                            <td>55</td>
+                            <td style="color : green">+ 6.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- vue script ------------------------------------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                students: [],
+                logs: []
+            },
+
+        })
+    </script>
+
+
+
+
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+</body>
+
+</html>
