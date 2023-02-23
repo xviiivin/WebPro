@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic of Vue 2</title>
+    <title>Basic of Vue 2 - Part 1</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
 
 <body>
     <div id='app'>
         <div class="navbar is-light p-5">
-            <b class="mr-4">WEEK 5</b>
+            <b class="mr-4">WEEK 6</b>
             <a href="./index.html" class="mr-4">Basic of VueJS 2</a>
-            <a href="../ex2/index.html" class="mr-4">Shop from Vue</a>
-            <a href="../ex2/checkout.html">Checkout</a>
         </div>
 
 
@@ -70,10 +68,10 @@
                         <input class="input" name="score" type="number" v-model="score" />
                     </div>
                 </div>
-                <code>prename = {{prename}}</code><br>
-                <code>fname = {{fname}}</code><br>
-                <code>lname = {{lname}}</code><br>
-                <code>score = {{score}}</code><br>
+                <code>prename 👉 {{prename}}</code><br>
+                <code>fname 👉 {{fname}}</code><br>
+                <code>lname 👉 {{lname}}</code><br>
+                <code>score 👉 {{score}}</code><br>
             </div>
 
             <hr>
@@ -103,7 +101,7 @@
             <div id='ex2'>
 
                 <!-- ปุ่ม Add Student------------------- -->
-                <a class="button is-primary">Add Student</a>
+                <a class="button is-primary" @click="addStudent()">Add Student</a>
 
                 <div>
                     <table class="table">
@@ -116,12 +114,12 @@
                         </thead>
                         <tbody>
                             <!-- ตัวอย่างข้อมูล------------ -->
-                            <tr>
-                                <td>นายxxxxx yyyyy</td>
-                                <td>99</td>
+                            <tr v-for="(Value, index) in students">
+                                <td>{{Value.prename}} {{Value.lname}}</td>
+                                <td>{{Value.score}}</td>
                                 <td>
                                     <!-- ปุ่ม Delete------------------- -->
-                                    <a class="button is-danger">Delete</a>
+                                    <a class="button is-danger" @click="removeStudent(index)">Delete</a>
                                 </td>
                             </tr>
 
@@ -140,7 +138,8 @@
                 ก็จะต้องหายไปตามการทำงานของ Method
             </p>
             <p class="my-4 has-background-info-light p-3">
-                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ของปุ่ม Delete ใน <code>&lt;div id="ex2"&gt;</code>
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ของปุ่ม Delete ใน
+                <code>&lt;div id="ex2"&gt;</code>
             </p>
 
             <hr>
@@ -169,15 +168,13 @@
                         <tr>
                             <th class="is-warning">sum</th>
                             <td>
-                                <!-- แสดงผลรวมคะแนนที่นี้ -->
-                                120
+                                {{sumScore}}
                             </td>
                         </tr>
                         <tr>
                             <th class="is-primary">avarage</th>
                             <td>
-                                <!-- แสดงค่าเฉลี่ยที่นี่ -->
-                                12.3
+                                {{avarageScore}}
                             </td>
                         </tr>
                     </tbody>
@@ -186,20 +183,21 @@
 
             <hr>
 
-            <p class="my-4"><b>ข้อ 5 </b> ให้สร้าง <b>Watchers</b> ในการดักจับการเปลี่ยนแปลงของค่า 
-                <code>averageScore</code> และทำการบันทึกการเปลี่ยนแปลงเข้าไปในตัวแปร <code>logs</code> 
+            <p class="my-4"><b>ข้อ 5 </b> ให้สร้าง <b>Watchers</b> ในการดักจับการเปลี่ยนแปลงของค่า
+                <code>averageScore</code> และทำการบันทึกการเปลี่ยนแปลงเข้าไปในตัวแปร <code>logs</code>
                 ในรูปแบบของ <b>Object</b> และนำข้อมูลใน <code>logs</code> มาแสดงผลในรูปของตาราง ตามตัวอย่างด้านล่าง
                 โดยมีเงื่อนไขในการแสดงผล ดังนี้
-                <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
-                    <li>ให้ตารางการแสดงผลมีทั้งหมด 3 columns ได้แก่ <b>Average Score Change, From และ Different From Old Value</b></li>
-                    <li>ถ้าค่า <code>averageScore</code> มีค่าเพิ่มขึ้น ให้แสดงผลโดยใช้ตัวอักษรสีเขียว</li>
-                    <li>ถ้าค่า <code>averageScore</code> มีค่าลดลง ให้แสดงผลโดยใช้ตัวอักษรสีแดง</li>
-                </ul>
-                </p>
-                <p class="my-4 has-background-info-light p-3">
-                    <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
-                    <code>&lt;div id="ex5"&gt;</code>
-                </p>
+            <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
+                <li>ให้ตารางการแสดงผลมีทั้งหมด 3 columns ได้แก่ <b>Average Score Change, From และ Different From Old
+                        Value</b></li>
+                <li>ถ้าค่า <code>averageScore</code> มีค่าเพิ่มขึ้น ให้แสดงผลโดยใช้ตัวอักษรสีเขียว</li>
+                <li>ถ้าค่า <code>averageScore</code> มีค่าลลง ให้แสดงผลโดยใช้ตัวอักษรสีแดง</li>
+            </ul>
+            </p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
+                <code>&lt;div id="ex5"&gt;</code>
+            </p>
 
             <!-- ข้อ 5 --------------------------------------------- -->
             <div id="ex5">
@@ -215,15 +213,103 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>50</td>
-                            <td>48.5</td>
-                            <td style="color : red">- 1.5</td>
+                        <tr v-for="(value,index) in logs" :key="i">
+
+
+                            <td>{{value.newVal}}</td>
+                            <td>{{value.oldVal}}</td>
+                            <td v-if="value.diff < 0" style="color : red">{{value.diff}}</td>
+                            <td v-else style="color : green">+{{value.diff}}</td>
                         </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+            <!-- ข้อ 6 --------------------------------------------- -->
+            <p><b>ข้อ 6</b> ให้ใช้ <b>Watchers</b> สำหรับการค้นหา <b>First Name และ Last Name</b>
+                แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
+            <p class="my-4 has-background-info-light p-3">
+                <b>ตัวช่วย</b>
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">💡Array.prototype.includes()</a>
+            </p>
+            <div id="ex6">
+                <div class="field">
+                    <div class="columns">
+                        <div class="column">
+                            <p class="control has-icons-left">
+                                <input class="input" type="text" placeholder="Name Search by Watchers">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
                         <tr>
-                            <td>48.5</td>
-                            <td>55</td>
-                            <td style="color : green">+ 6.5</td>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>E-mail</th>
+                            <th>Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in dummyData" :key="index">
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.gender}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <!-- ข้อ 7 --------------------------------------------- -->
+            <div class="ex7">
+                <b>ข้อ 7</b>
+                <p>ให้ใช้ <b>Computed</b> สำหรับการค้นหา <b>Gender</b> จากการเลือกตัวเลือกใน drop down list
+                    แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
+                <div style="display: flex; justify-content: flex-end;" class="my-2">
+                    <div class="control has-icons-left">
+                        <div class="select">
+                            <select>
+                                <option></option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Agender</option>
+                                <option>Bigender</option>
+                                <option>Genderfluid</option>
+                                <option>Non-binary</option>
+                            </select>
+                        </div>
+                        <span class="icon is-left">
+                            <i class="fa fa-transgender-alt"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>E-mail</th>
+                            <th>Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in dummyData" :key="index">
+                            <td>{{item.first_name}}</td>
+                            <td>{{item.last_name}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.gender}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -233,6 +319,7 @@
 
 
     <!-- vue script ------------------------------------------- -->
+    <script src="./data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script>
         var app = new Vue({
@@ -240,9 +327,72 @@
             data: {
                 message: 'Hello Vue!',
                 students: [],
-                logs: []
+                logs: [],
+                search: '',
+                dummyData: dummyData,
+                prename: '',
+                fname: '',
+                lname: '',
+                score: '',
+                ans1: 'Please enter all inputs',
+                ans2: 'Score is incorrect',
+                check1: '',
+                check2: ''
+
+            },
+            methods: {
+                addStudent() {
+
+                    if ((this.prename != '') && (this.fname != '') && (this.lname != '') && (this.score != '')) {
+                        if (this.score <= 100 && this.score >= 0) {
+                            this.students.push({
+                                prename: this.prename,
+                                fname: this.fname,
+                                lname: this.lname,
+                                score: this.score,
+                            })
+                            // this.prename = ''
+                            // this.fname = ''
+                            // this.lname = ''
+                            // this.score = ''
+                        }
+
+                        else {
+                            alert(this.ans2)
+                        }
+
+                    } else {
+                        alert(this.ans1)
+                    }
+                },
+                removeStudent(index) {
+                    this.students.splice(index, 1)
+                }
             },
 
+            computed: {
+                sumScore() {
+                    return this.students.reduce((sum, student) => sum + ~~(student.score), 0)
+                },
+                avarageScore() {
+                    return (this.sumScore / this.students.length) || 0
+                }
+            },
+
+            watch: {
+
+
+                avarageScore(newVal, oldVal, diff) {
+                    logs = {
+                        newVal: newVal,
+                        oldVal: oldVal,
+                        diff: newVal - oldVal
+                    }
+                    this.logs.push(logs)
+                },
+
+
+            }
         })
     </script>
 
