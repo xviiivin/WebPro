@@ -30,13 +30,13 @@
                         ตัวอย่างที่มีให้ และใส่ราคารวม แทนที่ตัวอย่างราคารวมที่ให้มา (copy ที่ทำไว้จากหน้า shop มาก็ได้)
                     </p>
                     <hr>
-                    <p class="my-4"><b>ข้อ 2 </b>ผูก v-model ให้กับ input แต่ละตัวใน Form (สามารถกำหนดชื่อตัวแปรเองได้เลย)
+                    <p class="my-4"><b>ข้อ 2 </b>ผูก v-model ให้กับ input แต่ละตัวใน Form
+                        (สามารถกำหนดชื่อตัวแปรเองได้เลย)
                     </p>
                     <hr>
-                    <p class="my-4"><b>ข้อ 3 </b>ให้สร้าง <b>Watchers</b> 
-                        ในการดักจับการเปลี่ยนแปลงของค่าของตัว Address 
-                        โดยเมื่อมีการพิมพ์ข้อความหรือเพิ่มข้อมูลใหม่ให้ทำการแสดงข้อความด้านใต้ textarea <b>ที่อยู่</b> ขึ้นคำว่า "กำลังพิมพ์" 
-                        <br/>โดยให้แสดงคำนี้ค้างไว้ต่อไปหลังจากเลิกพิมพ์เป็นเวลา 1000 milliseconds
+                    <p class="my-4"><b>ข้อ 3 </b>ให้สร้าง <b>Watchers หรือ Computed</b>
+                        โดยเมื่อเลือกจังหวัด ให้แสดงอำเภอภายในจังหวัดนั้น
+                        และเมื่อเลือกอำเภอ จะแสดงเฉพาะตำบลภายในอำเภอและจังหวัดนั้น
                     </p>
                     <hr>
                     <p class="my-4"><b>ข้อ 4 </b> ลองกดปุ่ม Confirm Order จะมี modal แสดงขึ้นมา
@@ -59,7 +59,6 @@
 
             <div class="navbar-menu">
                 <div class="navbar-start">
-                    <a href="../ex1/index.html" class="navbar-item">Basic of VueJS 2</a>
                     <a href="./index.html" class="navbar-item">Shop from Vue</a>
                     <a href="./checkout.html" class="navbar-item">Checkout</a>
                 </div>
@@ -146,50 +145,89 @@
             </div>
 
             <h1 class="is-size-4">Address Info</h1><br>
+
+
+
             <div class="columns">
                 <div class="column">
-                    <label class="label">ที่อยู่</label>
-                    <textarea class="textarea" placeholder="e.g. บ้านเลขที่ 123 ลาดกระบัง ...."></textarea>
-                    <p>กำลังพิมพ์...</p>
+                    <label class="label">จังหวัด</label>
+                    <div class="select">
+                        <select >
+                            <option v-for="item in province" :key="item.id" :value="item.id">
+                                {{ item.name_th }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
+                <div class="column">
+                    <label class="label">อำเภอ</label>
+                    <div class="select">
+                        <select >
+                            <option v-for="item in amphures" :key="item.id" :value="item.id">
+                                {{ item.name_th }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="column">
+                    <label class="label">ตำบล</label>
+                    <div class="select">
+                        <select >
+                            <option v-for="item in tambons" :key="item.id" :value="item.id">
+                                {{ item.name_th }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <!-- click this button to open Order modal ----------------- -->
+                    <label class="label">Comfrim</label>
+                    <a @click="modal_confirm_order = !modal_confirm_order" class="button is-warning">Confirm Order</a>
+                </div>
+
             </div>
 
+            <!-- Modal ของตารางใบเสร็จ ------------------------------------------------------------------>
+            <div class="modal" v-bind:class="{'is-active':modal_confirm_order}">
+                <div class="modal-background" @click="modal_confirm_order = !modal_confirm_order"></div>
+                <div class="modal-card" style="max-width: 960px;width: 90%;">
+                    <section class="modal-card-body">
+                        ตัวอย่าง order
+                        <img src="./Table example.png">
+                        <hr>
+                        Order Table ของนักศึกษา
+                        <table id='order-table' style="width: 100%;" class="table is-bordered">
+                            <!-- ใส่ข้อมูลของ table ไว้ในนี้ -------------------------------------------->
 
-            <!-- click this button to open Order modal ----------------- -->
-            <a @click="modal_confirm_order = !modal_confirm_order" class="button is-warning">Confirm Order</a>
-
-        </div>
-
-        <!-- Modal ของตารางใบเสร็จ ------------------------------------------------------------------>
-        <div class="modal" v-bind:class="{'is-active':modal_confirm_order}">
-            <div class="modal-background" @click="modal_confirm_order = !modal_confirm_order"></div>
-            <div class="modal-card" style="max-width: 960px;width: 90%;">
-                <section class="modal-card-body">
-                    ตัวอย่าง order
-                    <img src="./Table example.png">
-                    <hr>
-                    Order Table ของนักศึกษา
-                    <table id='order-table' style="width: 100%;" class="table is-bordered">
-                        <!-- ใส่ข้อมูลของ table ไว้ในนี้ -------------------------------------------->
-
-                    </table>
-                </section>
+                        </table>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
-    <!-- script ---------------------->
-    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                cart: [],
-                modal_confirm_order: false,
-                show_modal: false,
-                order_detail: {}
-            },
-        })
-    </script>
+</body>
+        <!-- script ---------------------->
+        <script src="./data/amphures.js"></script>
+        <script src="./data/province.js"></script>
+        <script src="./data/tambons.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    cart: [],
+                    modal_confirm_order: false,
+                    show_modal: false,
+                    order_detail: {},
+                    province: province, // ข้อมูลจังหวัด
+                    amphures: amphures, // ข้อมูลอำเภอ
+                    tambons: tambons, // ข้อมูลตำบล
+                },
+                
+            })
+
+        </script>
 
 </html>
