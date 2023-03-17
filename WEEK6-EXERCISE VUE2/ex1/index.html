@@ -48,7 +48,7 @@
                     <div class="column is-2">
                         <label>Prename</label><br>
                         <div class="select">
-                            <select class="select" name="prename" v-model="prename">
+                            <select class="select" name="prename" v-model="student.prename">
                                 <option>นาย</option>
                                 <option>นาง</option>
                                 <option>นางสาว</option>
@@ -57,21 +57,21 @@
                     </div>
                     <div class="column">
                         <label>Firstname</label>
-                        <input class="input" name="fname" v-model="fname" />
+                        <input class="input" name="fname" v-model="student.fname" />
                     </div>
                     <div class="column">
                         <label>Lastname</label>
-                        <input class="input" name="lname" v-model="lname" />
+                        <input class="input" name="lname" v-model="student.lname" />
                     </div>
                     <div class="column">
                         <label>Score</label>
-                        <input class="input" name="score" type="number" v-model="score" />
+                        <input class="input" name="score" type="number" v-model="student.score" />
                     </div>
                 </div>
-                <code>prename 👉 {{prename}}</code><br>
-                <code>fname 👉 {{fname}}</code><br>
-                <code>lname 👉 {{lname}}</code><br>
-                <code>score 👉 {{score}}</code><br>
+                <code>prename = {{student.prename}}</code><br>
+                <code>fname = {{student.fname}}</code><br>
+                <code>lname = {{student.lname}}</code><br>
+                <code>score = {{student.score}}</code><br>
             </div>
 
             <hr>
@@ -101,7 +101,7 @@
             <div id='ex2'>
 
                 <!-- ปุ่ม Add Student------------------- -->
-                <a class="button is-primary" @click="addStudent()">Add Student</a>
+                <a @click="addStudent()" class="button is-primary">Add Student</a>
 
                 <div>
                     <table class="table">
@@ -114,12 +114,12 @@
                         </thead>
                         <tbody>
                             <!-- ตัวอย่างข้อมูล------------ -->
-                            <tr v-for="(Value, index) in students">
-                                <td>{{Value.prename}} {{Value.lname}}</td>
-                                <td>{{Value.score}}</td>
+                            <tr v-for="(student, index) in students">
+                                <td>{{student.prename + student.fname + " " + student.lname}}</td>
+                                <td>{{student.score}}</td>
                                 <td>
                                     <!-- ปุ่ม Delete------------------- -->
-                                    <a class="button is-danger" @click="removeStudent(index)">Delete</a>
+                                    <a @click="students.splice(index,1)" class="button is-danger">Delete</a>
                                 </td>
                             </tr>
 
@@ -138,8 +138,7 @@
                 ก็จะต้องหายไปตามการทำงานของ Method
             </p>
             <p class="my-4 has-background-info-light p-3">
-                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ของปุ่ม Delete ใน
-                <code>&lt;div id="ex2"&gt;</code>
+                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ของปุ่ม Delete ใน <code>&lt;div id="ex2"&gt;</code>
             </p>
 
             <hr>
@@ -168,12 +167,15 @@
                         <tr>
                             <th class="is-warning">sum</th>
                             <td>
+                                <!-- แสดงผลรวมคะแนนที่นี้ -->
                                 {{sumScore}}
                             </td>
                         </tr>
                         <tr>
                             <th class="is-primary">avarage</th>
                             <td>
+                                <!-- แสดงค่าเฉลี่ยที่นี่ -->
+                                <!-- {{avarageScore}} -->
                                 {{avarageScore}}
                             </td>
                         </tr>
@@ -183,21 +185,20 @@
 
             <hr>
 
-            <p class="my-4"><b>ข้อ 5 </b> ให้สร้าง <b>Watchers</b> ในการดักจับการเปลี่ยนแปลงของค่า
-                <code>averageScore</code> และทำการบันทึกการเปลี่ยนแปลงเข้าไปในตัวแปร <code>logs</code>
+            <p class="my-4"><b>ข้อ 5 </b> ให้สร้าง <b>Watchers</b> ในการดักจับการเปลี่ยนแปลงของค่า 
+                <code>averageScore</code> และทำการบันทึกการเปลี่ยนแปลงเข้าไปในตัวแปร <code>logs</code> 
                 ในรูปแบบของ <b>Object</b> และนำข้อมูลใน <code>logs</code> มาแสดงผลในรูปของตาราง ตามตัวอย่างด้านล่าง
                 โดยมีเงื่อนไขในการแสดงผล ดังนี้
-            <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
-                <li>ให้ตารางการแสดงผลมีทั้งหมด 3 columns ได้แก่ <b>Average Score Change, From และ Different From Old
-                        Value</b></li>
-                <li>ถ้าค่า <code>averageScore</code> มีค่าเพิ่มขึ้น ให้แสดงผลโดยใช้ตัวอักษรสีเขียว</li>
-                <li>ถ้าค่า <code>averageScore</code> มีค่าลลง ให้แสดงผลโดยใช้ตัวอักษรสีแดง</li>
-            </ul>
-            </p>
-            <p class="my-4 has-background-info-light p-3">
-                <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
-                <code>&lt;div id="ex5"&gt;</code>
-            </p>
+                <ul style="list-style-type:lower-alpha;margin-left: 2rem;margin-bottom: 1.25rem;">
+                    <li>ให้ตารางการแสดงผลมีทั้งหมด 3 columns ได้แก่ <b>Average Score Change, From และ Different From Old Value</b></li>
+                    <li>ถ้าค่า <code>averageScore</code> มีค่าเพิ่มขึ้น ให้แสดงผลโดยใช้ตัวอักษรสีเขียว</li>
+                    <li>ถ้าค่า <code>averageScore</code> มีค่าลลง ให้แสดงผลโดยใช้ตัวอักษรสีแดง</li>
+                </ul>
+                </p>
+                <p class="my-4 has-background-info-light p-3">
+                    <b>วิธีทำ:</b> เปิดไฟล์นี้ในโปรแกรม vscode และแก้ไข code ใน
+                    <code>&lt;div id="ex5"&gt;</code>
+                </p>
 
             <!-- ข้อ 5 --------------------------------------------- -->
             <div id="ex5">
@@ -213,42 +214,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(value,index) in logs" :key="i">
-
-
-                            <td>{{value.newVal}}</td>
-                            <td>{{value.oldVal}}</td>
-                            <td v-if="value.diff < 0" style="color : red">{{value.diff}}</td>
-                            <td v-else style="color : green">+{{value.diff}}</td>
+                         <tr v-for="log in logs">
+                            <td>{{log.currAvg}}</td>
+                            <td>{{log.preAvg}}</td>
+                            <td v-bind:style="checkSumColor(log.diffAvg)">{{parseFloat(log.diffAvg.toFixed(2))}}</td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
 
             <hr>
             <!-- ข้อ 6 --------------------------------------------- -->
-            <p><b>ข้อ 6</b> ให้ใช้ <b>Watchers</b> สำหรับการค้นหา <b>First Name และ Last Name</b>
-                แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
+            <p><b>ข้อ 6</b> ให้ใช้ <b>Watchers</b> สำหรับการค้นหา <b>First Name และ Last Name</b> แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
             <p class="my-4 has-background-info-light p-3">
                 <b>ตัวช่วย</b>
-                <a
-                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">💡Array.prototype.includes()</a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">💡Array.prototype.includes()</a>
             </p>
             <div id="ex6">
                 <div class="field">
                     <div class="columns">
-                        <div class="column">
-                            <p class="control has-icons-left">
-                                <input class="input" type="text" placeholder="Name Search by Watchers">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </p>
-                        </div>
+                    <div class="column">
+                    <p class="control has-icons-left">
+                            <input class="input" type="text" placeholder="Name Search by Watchers" v-model="stringtemp">
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-search"></i>
+                      </span>
+                    </p>
                     </div>
                 </div>
-
+                  </div>
+                
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -259,7 +254,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in dummyData" :key="index">
+                        <tr v-for="(item, index) in searchByName"  :key="index">
                             <td>{{item.first_name}}</td>
                             <td>{{item.last_name}}</td>
                             <td>{{item.email}}</td>
@@ -274,27 +269,26 @@
             <!-- ข้อ 7 --------------------------------------------- -->
             <div class="ex7">
                 <b>ข้อ 7</b>
-                <p>ให้ใช้ <b>Computed</b> สำหรับการค้นหา <b>Gender</b> จากการเลือกตัวเลือกใน drop down list
-                    แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
+                <p>ให้ใช้ <b>Computed</b> สำหรับการค้นหา <b>Gender</b> จากการเลือกตัวเลือกใน drop down list แล้วแสดงผลข้อมูลตามที่ค้นหามาได้</p>
                 <div style="display: flex; justify-content: flex-end;" class="my-2">
                     <div class="control has-icons-left">
                         <div class="select">
-                            <select>
-                                <option></option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Agender</option>
-                                <option>Bigender</option>
-                                <option>Genderfluid</option>
-                                <option>Non-binary</option>
-                            </select>
+                          <select v-model="stringtemp2">
+                            <option></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Agender</option>
+                            <option>Bigender</option>
+                            <option>Genderfluid</option>
+                            <option>Non-binary</option>
+                          </select>
                         </div>
                         <span class="icon is-left">
                             <i class="fa fa-transgender-alt"></i>
                         </span>
                     </div>
                 </div>
-
+                
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -305,7 +299,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in dummyData" :key="index">
+                        <tr v-for="(item, index) in searchByGender"  :key="index">
                             <td>{{item.first_name}}</td>
                             <td>{{item.last_name}}</td>
                             <td>{{item.email}}</td>
@@ -326,74 +320,87 @@
             el: '#app',
             data: {
                 message: 'Hello Vue!',
+                student: {
+                  prename: "นาย",
+                    fname: "Norra",
+                    lname: "Sri",
+                    score: "99",
+                },
                 students: [],
                 logs: [],
-                search: '',
                 dummyData: dummyData,
-                prename: '',
-                fname: '',
-                lname: '',
-                score: '',
-                ans1: 'Please enter all inputs',
-                ans2: 'Score is incorrect',
-                check1: '',
-                check2: ''
-
+                stringtemp: '',
+                stringtemp2: '',
             },
             methods: {
-                addStudent() {
+              addStudent(student){
+                if(this.student.prename, this.student.fname, this.student.lname, this.student.score === ''){
+                  return alert("Please enter all inputs");
+                } else if (this.student.score < 0 || this.student.score > 100) {
+                  return alert("Score is incorrect");
 
-                    if ((this.prename != '') && (this.fname != '') && (this.lname != '') && (this.score != '')) {
-                        if (this.score <= 100 && this.score >= 0) {
-                            this.students.push({
-                                prename: this.prename,
-                                fname: this.fname,
-                                lname: this.lname,
-                                score: this.score,
-                            })
-                            // this.prename = ''
-                            // this.fname = ''
-                            // this.lname = ''
-                            // this.score = ''
-                        }
 
-                        else {
-                            alert(this.ans2)
-                        }
-
-                    } else {
-                        alert(this.ans1)
-                    }
-                },
-                removeStudent(index) {
-                    this.students.splice(index, 1)
-                }
+                } else {this.students.push(
+                  {
+                    prename: this.student.prename, 
+                    fname: this.student.fname, 
+                    lname: this.student.lname, 
+                    score: this.student.score
+                  },
+                )}
+                // } else {this.students.push(this.student)}
+              },
+              checkSumColor(value) {
+                return value > 0 ? "color:green;" : "color:red;"
+              }
             },
-
             computed: {
-                sumScore() {
-                    return this.students.reduce((sum, student) => sum + ~~(student.score), 0)
-                },
-                avarageScore() {
-                    return (this.sumScore / this.students.length) || 0
+              sumScore() {
+                return this.students.reduce((acc, curr) => acc + parseInt(curr.score), 0).toFixed(2)
+              },
+              avarageScore() {
+                  return (this.sumScore / this.students.length).toFixed(2)
+              },
+              searchByName(){
+                if(this.stringtemp === '') return this.dummyData;
+                if(this.stringtemp2 !== '') {
+                  return this.dummyData.filter(e => {
+                    let strtemp = `${e.first_name} ${e.last_name}`;
+                    return strtemp.toLocaleLowerCase().includes(this.stringtemp.toLocaleLowerCase()) && e.gender === this.stringtemp2
+                  })
                 }
+                  return this.dummyData.filter(e => {
+                    let strtemp = `${e.first_name} ${e.last_name}`;
+                    return strtemp.toLocaleLowerCase().includes(this.stringtemp.toLocaleLowerCase())
+                  })
+                // }
+              },
+              searchByGender(){
+                if(this.stringtemp2 === '') return this.dummyData;
+                return this.dummyData.filter(e => e.gender.includes(this.stringtemp2))
+              },
+              cart(){
+                return localStorage.getItem('cart');
+              }
+
             },
-
             watch: {
-
-
-                avarageScore(newVal, oldVal, diff) {
-                    logs = {
-                        newVal: newVal,
-                        oldVal: oldVal,
-                        diff: newVal - oldVal
-                    }
-                    this.logs.push(logs)
-                },
-
-
+              avarageScore(current, previous) {
+                this.logs.push({ 
+                  currAvg: current, 
+                  preAvg: previous,
+                  diffAvg: current - previous 
+                });
+                console.log(JSON.stringify(this.logs));
+              },
+              stringtemp(current, previous){
+                console.log(current)
+              },
+              stringtemp2(current, previous){
+                console.log(current)
+              }
             }
-        })
+          })
     </script>
 
 
