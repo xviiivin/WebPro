@@ -18,7 +18,6 @@ router.get("/blog/:id", (req, res) => {
     res.send(`Error "ไม่พบบทความ"`);
   }
   var data = { what: article[~~req.params.id - 1] };
-
   res.render("detail", data);
 });
 

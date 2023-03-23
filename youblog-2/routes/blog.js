@@ -22,4 +22,8 @@ router.get("/blog/:id", (req, res) => {
   res.render("detail", data);
 });
 
+router.post("/blogs/addlike/:blogId", async function (req, res, next) {
+  // Your code here
+});
+
 module.exports = router;

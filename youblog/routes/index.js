@@ -18,11 +18,6 @@ router.get("/", function (req, res, next) {
     res.render("index", data);
   }
 });
-router.get("/feawfeawfe/:id", function (req, res, next) {
-  console.log(req.params.id);
 
-  var data = { title: "Expqress", article: article, name: "wiwat" };
-  res.render("ex101", data);
-});
 
 module.exports = router;
