@@ -17,12 +17,8 @@
           <div class="field">
             <label class="label">Username</label>
             <div class="control has-icons-left">
-              <input
-                v-model="$v.username.$model"
-                :class="{ 'is-danger': $v.username.$error }"
-                class="input"
-                type="text"
-              />
+              <input v-model="$v.username.$model" :class="{ 'is-danger': $v.username.$error }" class="input"
+                type="text" />
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
@@ -40,12 +36,8 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.password.$model"
-                :class="{ 'is-danger': $v.password.$error }"
-                class="input"
-                type="password"
-              />
+              <input v-model="$v.password.$model" :class="{ 'is-danger': $v.password.$error }" class="input"
+                type="password" />
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -66,12 +58,8 @@
           <div class="field">
             <label class="label">Confirm Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.confirm_password.$model"
-                :class="{ 'is-danger': $v.confirm_password.$error }"
-                class="input"
-                type="password"
-              />
+              <input v-model="$v.confirm_password.$model" :class="{ 'is-danger': $v.confirm_password.$error }"
+                class="input" type="password" />
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -86,12 +74,7 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.email.$model"
-                :class="{ 'is-danger': $v.email.$error }"
-                class="input"
-                type="text"
-              />
+              <input v-model="$v.email.$model" :class="{ 'is-danger': $v.email.$error }" class="input" type="text" />
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
@@ -107,12 +90,7 @@
           <div class="field">
             <label class="label">Mobile Number</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.mobile.$model"
-                :class="{ 'is-danger': $v.mobile.$error }"
-                class="input"
-                type="text"
-              />
+              <input v-model="$v.mobile.$model" :class="{ 'is-danger': $v.mobile.$error }" class="input" type="text" />
               <span class="icon is-small is-left">
                 <i class="fas fa-mobile"></i>
               </span>
@@ -130,12 +108,8 @@
           <div class="field">
             <label class="label">First Name</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.first_name.$model"
-                :class="{ 'is-danger': $v.first_name.$error }"
-                class="input"
-                type="text"
-              />
+              <input v-model="$v.first_name.$model" :class="{ 'is-danger': $v.first_name.$error }" class="input"
+                type="text" />
             </div>
             <template v-if="$v.first_name.$error">
               <p class="help is-danger" v-if="!$v.first_name.required">
@@ -147,12 +121,8 @@
           <div class="field">
             <label class="label">Last Name</label>
             <div class="control has-icons-left has-icons-right">
-              <input
-                v-model="$v.last_name.$model"
-                :class="{ 'is-danger': $v.last_name.$error }"
-                class="input"
-                type="text"
-              />
+              <input v-model="$v.last_name.$model" :class="{ 'is-danger': $v.last_name.$error }" class="input"
+                type="text" />
             </div>
             <template v-if="$v.last_name.$error">
               <p class="help is-danger" v-if="!$v.last_name.required">
