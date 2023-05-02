@@ -87,7 +87,7 @@
             class="input"
             type="url"
             v-model="reference"
-            placeholder="e.g. https://www.google.com"
+            placeholder="e.g. https://www.wiwatza007x.com"
           />
         </div>
         <p class="help is-danger" v-if="!$v.reference.url">Must be valid url</p>

@@ -17,12 +17,14 @@ const indexRouter = require('./routes/index')
 const blogRouter = require('./routes/blog')
 const commentRouter = require('./routes/comment')
 const imageRouter = require('./routes/image')
+// เพิ่ม
 const userRouter = require('./routes/user')
 
 app.use(indexRouter.router)
 app.use(blogRouter.router)
 app.use(commentRouter.router)
 app.use(imageRouter.router)
+// เพิ่ม
 app.use(userRouter.router)
 
 app.listen(3000, () => {
